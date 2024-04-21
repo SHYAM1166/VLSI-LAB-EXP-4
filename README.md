@@ -1,10 +1,10 @@
 # VLSI-LAB-EXP-4
-SIMULATION AND IMPLEMENTATION OF SEQUENTIAL LOGIC CIRCUITS
+# SIMULATION AND IMPLEMENTATION OF SEQUENTIAL LOGIC CIRCUITS
 
-AIM: 
+# AIM: 
  To simulate and synthesis SR, JK, T, D - FLIPFLOP, COUNTER DESIGN using Xilinx ISE.
 
-APPARATUS REQUIRED:
+# APPARATUS REQUIRED:
 
 Xilinx 14.7
 Spartan6 FPGA
@@ -36,7 +36,7 @@ COUNTER
 
 
   
-PROCEDURE:
+# PROCEDURE:
 STEP:1  Start  the Xilinx navigator, Select and Name the New project.
 STEP:2  Select the device family, device, package and speed.       
 STEP:3  Select new source in the New Project and select Verilog Module as the Source type.                       
@@ -49,13 +49,195 @@ STEP:9  In the Design Object List Window, enter the pin location for each pin in
 STEP:10 Double click on the Implement Design and double click on the Generate Programming File to create a bitstream of the design.(.v) file is converted into .bit file here.
 STEP:11  On the board, by giving required input, the LEDs starts to glow light, indicating the output.
 
-VERILOG CODE
+# VERILOG CODE:
 
-   <<< TYPE YOUR VERILOG CODE >>>
+#  SR FLIPFLOP:
+module sr_ff(clk,q,rst,s,r);
 
-OUTPUT WAVEFORM
- <<< PASTE YOUR OUTPUT WAVEFORM >>>
+input s,r,clk,rst;
 
-RESULT
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+begin
+
+case({s,r})
+
+2'b00:q=q;
+
+2'b01:q=1'b0;
+
+2'b10:q=1'b1;
+
+2'b11:q=1'bx;
+
+endcase
+
+end
+
+end
+
+endmodule
+
+# JK FLIPFLOP:
+module jk_ff(clk,q,rst,j,k);
+
+input j,k,clk,rst;
+
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+begin
+
+case({j,k})
+
+2'b00:q=q;
+
+2'b01:q=1'b0;
+
+2'b10:q=1'b1;
+
+2'b11:q=~q;
+
+endcase
+
+end
+
+end
+
+endmodule
+
+# T FLIPFLOP:
+module t_ff(clk,q,rst,t);
+
+input t,clk,rst;
+
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+if(t==0)
+
+q=q;
+
+else
+
+q=~q;
+
+end
+
+endmodule
+
+# D FLIPFLOP:
+module d_ff(clk,q,rst,d);
+
+input d,clk,rst;
+
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+q=d;
+
+end
+
+endmodule
+
+# MOD 10 COUNTER:
+module mod_10(clk,rst,out);
+
+input clk,rst;
+
+output reg[3:0]out;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1|out==9)
+
+out=4'b0;
+
+else
+
+out=out+1;
+
+end
+
+endmodule
+
+# UPDOWN COUNTER:
+module updown_counter(clk,rst,ud,out);
+
+input clk,rst,ud;
+
+output reg[3:0]out;
+
+always@(posedge clk) begin if(rst==1) out=4'b0; else if (ud==1) out=out+1;
+
+else if(ud==0) out=out-1;
+
+end endmodule
+
+
+
+# OUTPUT WAVEFORM:
+# SR FLIP FLOP:
+![image](https://github.com/SHYAM1166/VLSI-LAB-EXP-4/assets/162670843/5e479fc2-97c0-4fcc-ae7d-178e6689718b)
+
+# JK FLIP FLOP:
+![image](https://github.com/SHYAM1166/VLSI-LAB-EXP-4/assets/162670843/98e86571-a786-4d9a-8208-108b1d72a18b)
+
+# T FLIP FLOP:
+![image](https://github.com/SHYAM1166/VLSI-LAB-EXP-4/assets/162670843/1bc70e51-d87f-40de-9532-6be4d25a32ff)
+
+# D FLIP FLOP:
+![image](https://github.com/SHYAM1166/VLSI-LAB-EXP-4/assets/162670843/2692002b-6ed0-4a3b-a751-0987e71fa345)
+
+# MOD 10 COUNTER:
+![image](https://github.com/SHYAM1166/VLSI-LAB-EXP-4/assets/162670843/202471d5-ab81-4cbf-a032-9c1a1b37f91c)
+
+# UP DOWN COUNTER:
+![image](https://github.com/SHYAM1166/VLSI-LAB-EXP-4/assets/162670843/672ebac4-9bac-4ef7-a740-f92c78251132)
+
+
+# RESULT:
+Thus the simulation of sequential circuits is done and outputs are verified successfully.
+
+
 
 
